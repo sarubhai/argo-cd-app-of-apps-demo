@@ -1,0 +1,12 @@
+apiVersion: v2
+name: k8s-apps
+description: Helm Chart for Kubernetes application resources
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+maintainers:
+  - name: sarubhai
+    email: saurav.karate@gmail.com
+keywords:
+  - k8s-applications
+  - k8s-app-charts

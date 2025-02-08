@@ -1,0 +1,62 @@
+# Variables values for Chart templates
+clusters:
+  - name: in-cluster
+    apps:
+      enabled: true
+      version: HEAD
+      valueFiles: values-dev.yaml
+      nginx:
+        enabled: false
+        version: HEAD
+      postgresql:
+        enabled: false
+        version: HEAD
+      mariadb:
+        enabled: true
+        version: HEAD
+      memcached:
+        enabled: true
+        version: HEAD
+      wordpress:
+        enabled: true
+        version: HEAD
+  - name: eks-cluster-stg
+    apps:
+      enabled: false
+      version: HEAD
+      valueFiles: values-stg.yaml
+      nginx:
+        enabled: false
+        version: HEAD
+      postgresql:
+        enabled: false
+        version: HEAD
+      mariadb:
+        enabled: true
+        version: HEAD
+      memcached:
+        enabled: true
+        version: HEAD
+      wordpress:
+        enabled: true
+        version: HEAD
+  - name: eks-cluster-pro
+    apps:
+      enabled: false
+      version: HEAD
+      valueFiles: values-pro.yaml
+      nginx:
+        enabled: false
+        version: HEAD
+      postgresql:
+        enabled: false
+        version: HEAD
+      mariadb:
+        enabled: true
+        version: HEAD
+      memcached:
+        enabled: true
+        version: HEAD
+      wordpress:
+        enabled: true
+        version: HEAD

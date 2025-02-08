@@ -1,0 +1,16 @@
+memcached:
+  global:
+    security:
+      allowInsecureImages: false
+  architecture: standalone
+  auth:
+    enabled: false
+  replicaCount: 1
+  containerPorts:
+    memcached: 11211
+  service:
+    type: ClusterIP
+    ports:
+      memcached: 11211
+  persistence:
+    enabled: false

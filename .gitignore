@@ -1,0 +1,7 @@
+argo-cd/charts/*
+Chart.lock
+argo-cd-applications/app-charts/*/charts/*
+selfsigned.key
+selfsigned.crt
+.DS_Store
+Zdoc.md

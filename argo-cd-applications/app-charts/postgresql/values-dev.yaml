@@ -1,0 +1,19 @@
+postgresql:
+  global:
+    security:
+      allowInsecureImages: true
+    postgresql:
+      auth:
+        username: postgres
+        database: postgres
+        postgresPassword: "Pas55w0rd1234"
+      service:
+        ports:
+          postgresql: 5432
+  architecture: standalone
+  tls:
+    enabled: false
+  primary:
+    name: primary
+    standby:
+      enabled: false

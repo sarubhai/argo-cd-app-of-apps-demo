@@ -1,0 +1,37 @@
+{{- range .Values.clusters }}
+{{- if .apps.enabled }}
+{{- if .apps.postgresql.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{printf "%s-%s" .name "postgresql"}}
+  namespace: argo-cd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: k8s-app-resources
+  source:
+    repoURL: https://github.com/sarubhai/argo-cd-app-of-apps-demo
+    targetRevision: {{ .apps.postgresql.version }}
+    path: argo-cd-applications/app-charts/postgresql
+    helm:
+      releaseName: postgresql
+      valueFiles:
+        - {{ .apps.valueFiles }}
+      version: v3
+  destination:
+    name: {{ .name }}
+    namespace: postgresql
+  syncPolicy:
+    automated: 
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+      - ServerSideApply=true
+      - RespectIgnoreDifferences=true
+{{- end }}
+{{- end }}
+---
+{{- end }}

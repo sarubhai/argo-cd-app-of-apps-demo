@@ -1,0 +1,16 @@
+apiVersion: v2
+name: memcached
+description: Memcached is an high-performance, distributed memory object caching system, generic in nature, but intended for use in speeding up dynamic web applications by alleviating database load.
+type: application
+version: 7.6.3
+# appVersion: 1.6.36
+maintainers:
+  - name: sarubhai
+    email: saurav.karate@gmail.com
+keywords:
+  - memcached
+  - cache
+dependencies:
+  - name: memcached
+    version: 7.6.3
+    repository: https://charts.bitnami.com/bitnami

@@ -1,0 +1,11 @@
+nginx:
+  service:
+    type: ClusterIP
+  ingress:
+    enabled: true
+    hostname: nginx-dev.local
+    ingressClassName: nginx
+    annotations:
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/backend-protocol: HTTP
+    tls: false

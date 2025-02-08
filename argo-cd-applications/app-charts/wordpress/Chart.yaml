@@ -1,0 +1,21 @@
+apiVersion: v2
+name: wordpress
+description: WordPress is the world's most popular blogging and content management platform. Powerful yet simple, everyone from students to global corporations use it to build beautiful, functional websites.
+type: application
+version: 24.1.9
+# appVersion: 6.7.1
+maintainers:
+  - name: sarubhai
+    email: saurav.karate@gmail.com
+keywords:
+  - application
+  - blog
+  - cms
+  - http
+  - php
+  - web
+  - wordpress
+dependencies:
+  - name: wordpress
+    version: 24.1.9
+    repository: https://charts.bitnami.com/bitnami

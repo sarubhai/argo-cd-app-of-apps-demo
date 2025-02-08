@@ -1,0 +1,18 @@
+apiVersion: v2
+name: nginx
+description: A Helm chart for NGINX Open Source is a web server that can be also used as a reverse proxy, load balancer, and HTTP cache.
+type: application
+version: 18.2.6
+maintainers:
+  - name: sarubhai
+    email: saurav.karate@gmail.com
+keywords:
+  - nginx
+  - http
+  - web
+  - www
+  - reverse proxy
+dependencies:
+  - name: nginx
+    version: 18.2.6
+    repository: https://charts.bitnami.com/bitnami

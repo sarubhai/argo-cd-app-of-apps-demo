@@ -1,0 +1,37 @@
+{{- range .Values.clusters }}
+{{- if .apps.enabled }}
+{{- if .apps.nginx.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{printf "%s-%s" .name "nginx"}}
+  namespace: argo-cd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: k8s-app-resources
+  source:
+    repoURL: https://github.com/sarubhai/argo-cd-app-of-apps-demo
+    targetRevision: {{ .apps.nginx.version }}
+    path: argo-cd-applications/app-charts/nginx
+    helm:
+      releaseName: nginx
+      valueFiles:
+        - {{ .apps.valueFiles }}
+      version: v3
+  destination:
+    name: {{ .name }}
+    namespace: nginx
+  syncPolicy:
+    automated: 
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+      - ServerSideApply=true
+      - RespectIgnoreDifferences=true
+{{- end }}
+{{- end }}
+---
+{{- end }}

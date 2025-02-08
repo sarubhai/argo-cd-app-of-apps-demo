@@ -1,0 +1,50 @@
+wordpress:
+  global:
+    security:
+      allowInsecureImages: false
+  wordpressUsername: admin
+  wordpressPassword: "S3cret!23456"
+  # existingSecret: ""
+  wordpressEmail: saurav.karate@gmail.com
+  wordpressFirstName: Sauarv
+  wordpressLastName: Mitra
+  wordpressBlogName: ArgoCD
+  wordpressTablePrefix: wp_
+  wordpressScheme: http
+  wordpressSkipInstall: false
+  multisite:
+    enable: false
+  replicaCount: 1
+  containerPorts:
+    http: 8080
+    https: 8443
+  service:
+    type: ClusterIP
+    ports:
+      http: 80
+      https: 443
+    httpsTargetPort: https
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hostname: wordpress-dev.local
+    annotations:
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/backend-protocol: HTTP
+    tls: false
+  persistence:
+    enabled: false
+  mariadb:
+    enabled: false
+  externalDatabase:
+    host: mariadb.mariadb.svc.cluster.local
+    port: 3306
+    user: wordpress_user
+    password: "Pas55w0rd1234"
+    database: wordpress
+    # existingSecret: ""
+  memcached:
+    enabled: false
+  externalCache:
+    host: memcached.memcached.svc.cluster.local
+    port: 11211

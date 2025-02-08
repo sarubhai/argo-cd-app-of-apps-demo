@@ -1,0 +1,21 @@
+mariadb:
+  global:
+    security:
+      allowInsecureImages: false
+  architecture: standalone
+  auth:
+    rootPassword: "r00tPas55w0rd1234"
+    username: wordpress_user
+    password: "Pas55w0rd1234"
+    database: wordpress
+  tls:
+    enabled: false
+  primary:
+    containerPorts:
+      mysql: 3306
+    persistence:
+      enabled: false
+    service:
+      type: ClusterIP
+      ports:
+        mysql: 3306

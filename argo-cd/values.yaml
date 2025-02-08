@@ -1,0 +1,62 @@
+argo-cd:
+  ## Globally shared configuration
+  global:
+    domain: argo-cd.local
+  ## Argo Configs
+  configs:
+    # General Argo CD configuration (argocd-cm)
+    cm:
+      # Enable logs RBAC enforcement
+      server.rbac.log.enforce.enable: true
+      # Enable exec feature in Argo UI
+      exec.enabled: true
+      # Enable Status Badge
+      statusbadge.enabled: true
+      # Custom Health Check for argoproj.io/Application CRD
+      resource.customizations.health.argoproj.io_Application: |
+        hs = {}
+        hs.status = "Progressing"
+        hs.message = ""
+        if obj.status ~= nil then
+          if obj.status.health ~= nil then
+            hs.status = obj.status.health.status
+            if obj.status.health.message ~= nil then
+              hs.message = obj.status.health.message
+            end
+          end
+        end
+        return hs
+      
+      # The maximum length of a local account's username is 32.
+      accounts.saurav: apiKey, login
+      accounts.guest: login
+    # Argo CD RBAC policy configuration (argocd-rbac-cm)
+    rbac:
+      create: true
+      policy.overlay.csv: |
+        g, saurav, role:admin
+        g, guest, role:readonly
+      policy.default: role:readonly
+    # Argo CD configuration parameters (argocd-cmd-params-cm)
+    params:
+      # Server properties
+      # Run server without TLS
+      ## NOTE: This value should be set when you generate params by other means as it changes ports used by ingress template.
+      server.insecure: true
+  ## Server
+  server:
+    ## Argo CD server ingress configuration
+    ingress:
+      enabled: true
+      annotations:
+        nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/backend-protocol: HTTP
+      ingressClassName: nginx
+      tls: true
+  ## Notifications controller
+  notifications:
+    # Enable notifications controller
+    enabled: false
+  ## Dex
+  dex:
+    enabled: false
